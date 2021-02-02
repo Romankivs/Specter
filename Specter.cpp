@@ -64,67 +64,33 @@ void makeTable(ofstream& stream, int dimension, int m, int loopLength, vector<ve
     if (dimension == 0)
     {
         int counter = count(mainVec.begin(), mainVec.end(), vec);
-        stream << //"\n<table>\n"
-            "<th>"
-            << counter <<
-            "</th>\n";
-            //"<table>\n";
-    }
-    else if (dimension == 1)
-    {
-        //stream << "<table>";
-        stream << "<tr>\n";
-        for (int k = 0; k < m; k++)
-            makeTable(stream, dimension - 1, m, loopLength, mainVec, vec);
-        stream << "</tr>\n";
-        //stream << "</table>";
-    }
-    else if (dimension == 2)
-    {
-        stream << 
-            "<table>";
-        for (int j = 0; j < m; j++)
-        {
-            stream << "<tr>";
-            makeTable(stream, dimension - 1, m, loopLength, mainVec, vec);
-            stream << "</tr>";
-        }
-        stream << "</table>\n"
-            ;
+        stream << counter;
     }
     else if (dimension % 2 == 1)
     {
-        /*/stream << "\n<table>\n";
-        for (int k = 0; k < m; k++)
-        {
-            stream << "<th>\n";
-            makeTable(stream, dimension - 1, m, loopLength, mainVec, vec);
-            stream << "</th>";
-        }
-        stream << "</table>\n";*/
-        stream << "<table>";
+
         for (int j = 0; j < m; j++)
         {
             stream << "<th>";
-            makeTable(stream, dimension - 1, m, loopLength, mainVec, vec);
-            stream << "</th>";
+            vector<int> tempPush = vec;
+            tempPush.push_back(j);
+            makeTable(stream, dimension - 1, m, loopLength, mainVec, tempPush);
+            stream << "</th>\n";
         }
-        stream << "</table>";
+
     }
     else if (dimension % 2 == 0)
     {
-
-        /*stream << "<tr>\n";
-        for (int i = 0; i < m; i++)
-            makeTable(stream, dimension - 1, m, loopLength, mainVec, vec);
-        stream << "</tr>\n";*/
-        
+        stream << "<table>";
         for (int j = 0; j < m; j++)
         {
-            stream << "<tr>";
-            makeTable(stream, dimension - 1, m, loopLength, mainVec, vec);
-            stream << "</tr>";
+            stream << "<tr>\n";
+            vector<int> tempPush = vec;
+            tempPush.push_back(j);
+            makeTable(stream, dimension - 1, m, loopLength, mainVec, tempPush);
+            stream << "</tr>\n";
         }
+        stream << "</table>";
     }
 
 
@@ -134,18 +100,16 @@ int main()
 {
     ofstream table("table.html");
     beginHtmlDoc(table);
-    int dimensions = 1;
-    int m = 5;
-    int loopLength = looplength(0, 1, 5);
+    int dimensions = 2;
+    int m = 20;
+    int loopLength = looplength(0, 1, m);
     cout << "Loop Length: " << loopLength << endl;
     vector<int> startingVec = createStartingVec(loopLength, m);
+    cout << "size: " << startingVec.size() << endl;
     if ((startingVec.size() % dimensions) != 0)
     {
         dublivateVecDataNtimes(dimensions, startingVec);
     }
-    vector<vector<int>> mainVector = { {0,0},{0,0},{1,1} };
-    vector<int> vec = { 0,0 };
-    dublivateVecDataNtimes(1, vec);
     for (int i = 0; i < startingVec.size(); ++i)
     {
         cout << startingVec[i] << endl;
@@ -153,9 +117,11 @@ int main()
     vector<vector<int>> result = divideVecByNElements(dimensions, startingVec);
     cout << result.size() << endl;
     vector<int> vecSearch;
-    table << "<table>";
-    makeTable(table, 4, m, loopLength, result, vecSearch);
-    table << "</table>";
+    if (dimensions % 2 == 1)
+        table << "\n<table>\n";
+    makeTable(table, dimensions, m, loopLength, result, vecSearch);
+    if (dimensions % 2 == 1)
+        table << "\n</table>\n";
     
 }
 
