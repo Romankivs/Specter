@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <random>
+#include <iomanip>
 #include "loopLength.h"
 
 using namespace std;
@@ -38,7 +38,6 @@ vector<vector<int>> divideVecByNElements(int N, vector<int> & vec)
             tempVec.push_back(vec[j]);
         }
         for (int k = 0; k < tempVec.size(); k++)
-            cout << tempVec[k] << ", ";
         resultVec.push_back(tempVec);
     }
     return resultVec;
@@ -63,8 +62,23 @@ void makeTable(ofstream& stream, int dimension, int m, int loopLength, vector<ve
 {
     if (dimension == 0)
     {
+        stream << "<th bgcolor = ";
         int counter = count(mainVec.begin(), mainVec.end(), vec);
-        stream << counter;
+        int colorChange = counter * 50;
+        if (colorChange > 255)
+            colorChange = 255;
+        stream << "#ff" << hex << (255 - colorChange) << hex << (255 - colorChange) << ">";
+        stream << dec <<  counter;
+        stream << "</th>";
+    }
+    else if (dimension == 1)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            vector<int> tempPush = vec;
+            tempPush.push_back(j);
+            makeTable(stream, dimension - 1, m, loopLength, mainVec, tempPush);
+        }
     }
     else if (dimension % 2 == 1)
     {
@@ -92,30 +106,21 @@ void makeTable(ofstream& stream, int dimension, int m, int loopLength, vector<ve
         }
         stream << "</table>";
     }
-
-
 }
 
 int main()
 {
     ofstream table("table.html");
     beginHtmlDoc(table);
-    int dimensions = 2;
-    int m = 20;
+    int dimensions = 5;
+    int m = 3;
     int loopLength = looplength(0, 1, m);
-    cout << "Loop Length: " << loopLength << endl;
     vector<int> startingVec = createStartingVec(loopLength, m);
-    cout << "size: " << startingVec.size() << endl;
     if ((startingVec.size() % dimensions) != 0)
     {
         dublivateVecDataNtimes(dimensions, startingVec);
     }
-    for (int i = 0; i < startingVec.size(); ++i)
-    {
-        cout << startingVec[i] << endl;
-    }
     vector<vector<int>> result = divideVecByNElements(dimensions, startingVec);
-    cout << result.size() << endl;
     vector<int> vecSearch;
     if (dimensions % 2 == 1)
         table << "\n<table>\n";
