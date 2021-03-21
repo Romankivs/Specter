@@ -24,12 +24,24 @@
     <ClCompile Include="loopLength.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VecFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tableMaker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fModM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="loopLength.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tableMaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VecFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -150,10 +150,14 @@
     <ClCompile Include="fModM.cpp" />
     <ClCompile Include="loopLength.cpp" />
     <ClCompile Include="Specter.cpp" />
+    <ClCompile Include="tableMaker.cpp" />
+    <ClCompile Include="VecFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fModM.h" />
     <ClInclude Include="loopLength.h" />
+    <ClInclude Include="tableMaker.h" />
+    <ClInclude Include="VecFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
