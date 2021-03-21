@@ -1,8 +1,8 @@
 #include "fModM.h"
 
-int F0;
-int F1;
-int M;
+static int F0;
+static int F1;
+static int M;
 
 void InitFmodM(const int firstElement, const int secondElement, const int Key)
 {

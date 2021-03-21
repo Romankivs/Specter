@@ -23,7 +23,7 @@ void TableMaker::start()
         stream << "\n</table>\n";
 }
 
-void  TableMaker::beginHtmlDoc()
+void TableMaker::beginHtmlDoc()
 {
     stream << "<!DOCTYPE html>\n"
         "<html>\n"
@@ -38,7 +38,7 @@ void  TableMaker::beginHtmlDoc()
         "<body>";
 }
 
-void  TableMaker::makeCell(vector<int>& vec)
+void TableMaker::makeCell(vector<int>& vec)
 {
     stream << "<th bgcolor = ";
     int counter = count(mainVec.begin(), mainVec.end(), vec);
@@ -50,7 +50,7 @@ void  TableMaker::makeCell(vector<int>& vec)
     stream << "</th>";
 }
 
-void  TableMaker::makeFirstRow(int dimension, vector<int>& vec)
+void TableMaker::makeFirstRow(int dimension, vector<int>& vec)
 {
     for (int j = 0; j < m; j++)
     {
@@ -60,7 +60,7 @@ void  TableMaker::makeFirstRow(int dimension, vector<int>& vec)
     }
 }
 
-void  TableMaker::makeRow(int dimension, vector<int>& vec)
+void TableMaker::makeRow(int dimension, vector<int>& vec)
 {
     for (int j = 0; j < m; j++)
     {
@@ -72,7 +72,7 @@ void  TableMaker::makeRow(int dimension, vector<int>& vec)
     }
 }
 
-void  TableMaker::makeColumn(int dimension, vector<int>& vec)
+void TableMaker::makeColumn(int dimension, vector<int>& vec)
 {
     stream << "<table>";
     for (int j = 0; j < m; j++)
@@ -86,7 +86,7 @@ void  TableMaker::makeColumn(int dimension, vector<int>& vec)
     stream << "</table>";
 }
 
-void  TableMaker::makeTable(int dimension, vector<int>& vec)
+void TableMaker::makeTable(int dimension, vector<int>& vec)
 {
     if (dimension == 0)
     {
